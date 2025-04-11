@@ -1,0 +1,241 @@
+/* === Базовая настройка === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background: #f4f7fc;
+    color: #222;
+    line-height: 1.6;
+  }
+  
+  /* === Header === */
+  .header {
+    background: linear-gradient(135deg, #0077ff, #00c8ff);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .logo h1 {
+    font-size: 1.8em;
+  }
+  
+  .lang-switch button {
+    background: white;
+    color: #0077ff;
+    border: none;
+    padding: 8px 14px;
+    margin-left: 8px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .lang-switch button:hover {
+    background: #e0f0ff;
+  }
+  
+  /* === Навигация === */
+  .nav {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .nav .btn {
+    background: #fff;
+    color: #0077ff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  }
+  
+  .nav .btn:hover {
+    background: #e6f4ff;
+  }
+  
+  /* === Герой === */
+  .hero {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .hero h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  /* === Образовательный блок === */
+  .main-content {
+    padding: 40px 20px;
+  }
+  
+  .educational-section h2 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 30px;
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+  }
+  
+  .card {
+    background: white;
+    width: 300px;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  
+  .card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .card h3 {
+    color: #0077ff;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    color: #333;
+  }
+  
+  /* === AI Чат === */
+  #chatbot {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999;
+  }
+  
+  #openChat {
+    background: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  
+  #chatWindow {
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  #chatWindow.hidden {
+    display: none;
+  }
+  
+  #chatHeader {
+    background: #0077ff;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  #chatMessages {
+    padding: 10px;
+    height: 180px;
+    overflow-y: auto;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  #userInput {
+    padding: 10px;
+    border: none;
+    border-top: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  /* === Подвал === */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background: #eaf4ff;
+    color: #555;
+    font-size: 0.9em;
+    margin-top: 50px;
+    border-top: 1px solid #cde4ff;
+  }
+  
+  /* === Адаптивность === */
+  @media (max-width: 768px) {
+    .cards-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .header-top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .logo h1 {
+      font-size: 1.5em;
+    }
+  
+    .nav {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  

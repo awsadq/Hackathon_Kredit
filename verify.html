@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Идентификация – KreditFast</title>
+  <link rel="stylesheet" href="css/verify.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Цифровая идентификация личности</h2>
+
+    <!-- 📸 Селфи -->
+    <div class="section">
+      <h3>1. Сделайте селфи</h3>
+      <video id="camera" autoplay playsinline></video>
+      <button id="takePhotoBtn">📸 Сделать фото</button>
+      <canvas id="snapshot" style="display:none;"></canvas>
+      <img id="selfiePreview" style="max-width: 100%; margin-top: 10px;" alt="Селфи превью">
+    </div>
+
+    <!-- 🪪 Паспорт -->
+    <div class="section">
+      <h3>2. Загрузите фото паспорта</h3>
+      <input type="file" id="passportInput" accept="image/*" required />
+      <img id="passportPreview" style="max-width: 100%; margin-top: 10px;" alt="Паспорт превью">
+    </div>
+
+    <button id="confirmBtn" disabled>✅ Подтвердить личность</button>
+  </div>
+
+  <script>
+    const video = document.getElementById('camera');
+    const takePhotoBtn = document.getElementById('takePhotoBtn');
+    const canvas = document.getElementById('snapshot');
+    const selfiePreview = document.getElementById('selfiePreview');
+    const passportInput = document.getElementById('passportInput');
+    const passportPreview = document.getElementById('passportPreview');
+    const confirmBtn = document.getElementById('confirmBtn');
+
+    let selfieTaken = false;
+    let passportUploaded = false;
+
+    // 📷 Доступ к камере
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      }).catch(err => {
+        alert("Ошибка доступа к камере: " + err.message);
+      });
+
+    // 📸 Снятие селфи
+    takePhotoBtn.addEventListener('click', () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      selfiePreview.src = canvas.toDataURL('image/png');
+      selfieTaken = true;
+      checkReady();
+    });
+
+    // 🪪 Загрузка паспорта
+    passportInput.addEventListener('change', () => {
+      const file = passportInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          passportPreview.src = e.target.result;
+          passportUploaded = true;
+          checkReady();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // ✅ Активация кнопки подтверждения
+    function checkReady() {
+      if (selfieTaken && passportUploaded) {
+        confirmBtn.disabled = false;
+      }
+    }
+
+    // 🔄 Подтверждение
+    confirmBtn.addEventListener('click', () => {
+      alert('Личность подтверждена! ✅');
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>

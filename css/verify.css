@@ -1,0 +1,135 @@
+/* === Базовое оформление === */
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #0077ff, #00c8ff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+  }
+  
+  /* === Контейнер === */
+  .form-container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.5s ease;
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .form-container h2 {
+    text-align: center;
+    color: #0077ff;
+    margin-bottom: 30px;
+    font-size: 24px;
+  }
+  
+  /* === Секции камеры и загрузки === */
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  .section h3 {
+    font-size: 16px;
+    color: #0077ff;
+    margin-bottom: 10px;
+  }
+  
+  /* === Камера и кнопка === */
+  video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  #takePhotoBtn {
+    margin-top: 10px;
+    background: #0077ff;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+  }
+  
+  #takePhotoBtn:hover {
+    background: #005fcc;
+  }
+  
+  /* === Превью изображений === */
+  #selfiePreview,
+  #passportPreview {
+    margin-top: 12px;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+  }
+  
+  /* === Файл-инпут === */
+  input[type="file"] {
+    padding: 10px;
+    background: #f6f8fa;
+    border: 1.5px dashed #0077ff;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  input[type="file"]:hover {
+    background: #eef6ff;
+  }
+  
+  /* === Кнопка подтверждения === */
+  #confirmBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: not-allowed;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    opacity: 0.6;
+  }
+  
+  #confirmBtn:enabled {
+    cursor: pointer;
+    opacity: 1;
+  }
+  
+  #confirmBtn:hover:enabled {
+    background: #43a047;
+  }
+  
+  /* === Адаптивность === */
+  @media (max-width: 480px) {
+    .form-container {
+      padding: 30px 20px;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    #takePhotoBtn,
+    #confirmBtn {
+      font-size: 14px;
+    }
+  }
+  

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход – KreditFast</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Вход в систему</h2>
+    <form id="loginForm">
+      <label for="phone">Номер телефона:</label>
+      <input type="tel" id="loginPhone" name="phone" required placeholder="+996700123456">
+
+      <label for="password">Пароль:</label>
+      <input type="password" id="loginPassword" name="password" required>
+
+      <button type="button" onclick="sendCode()">Войти</button>
+    </form>
+
+    <div id="smsCodeSection" style="display: none; margin-top: 20px;">
+      <label for="smsCode">Введите код из SMS:</label>
+      <input type="text" id="smsCode" name="smsCode" maxlength="6" required>
+      <button onclick="verifyCode()">Подтвердить</button>
+    </div>
+
+    <p>Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
