@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Панель администратора</title>
+  <link rel="stylesheet" href="css/admin-view.css" />
+
+</head>
+<body>
+
+  <div class="container">
+    <h1>Панель администратора</h1>
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Имя пользователя</th>
+          <th>Скоринг</th>
+          <th>Статус заявки</th>
+          <th>Сумма</th>
+          <th>Срок</th>
+          <th>Поручители</th>
+        </tr>
+      </thead>
+      <tbody id="adminTableBody">
+        <!-- Сюда вставятся заявки -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Эмуляция списка заявок (можно загрузить с backend.js)
+    const loanRequests = JSON.parse(localStorage.getItem("loanRequests")) || [
+      {
+        username: "Алия К.",
+        score: 9,
+        status: "Одобрено",
+        amount: 50000,
+        term: 6,
+        guarantors: []
+      },
+      {
+        username: "Нурбек С.",
+        score: 4,
+        status: "Отклонено",
+        amount: 70000,
+        term: 12,
+        guarantors: ["Айгуль А.", "Тимур Ж."]
+      },
+      {
+        username: "Айгул К.",
+        score: 6,
+        status: "Ожидает",
+        amount: 20000,
+        term: 3,
+        guarantors: []
+      }
+    ];
+
+    const tableBody = document.getElementById("adminTableBody");
+
+    loanRequests.forEach(req => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${req.username}</td>
+        <td>${req.score}/10</td>
+        <td>${req.status}</td>
+        <td>${req.amount} сом</td>
+        <td>${req.term} мес.</td>
+        <td>${req.guarantors.length > 0 ? req.guarantors.join(", ") : "—"}</td>
+      `;
+
+      tableBody.appendChild(row);
+    });
+  </script>
+
+</body>
+</html>

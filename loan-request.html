@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Заявка на кредит</title>
+  <link rel="stylesheet" href="css/loan-request.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Подать заявку на кредит</h1>
+
+    <form id="loanForm" class="loan-form">
+      <label for="amount">Сумма кредита (сом):</label>
+      <input type="number" id="amount" name="amount" required min="1000" step="1000" placeholder="Введите сумму" />
+
+      <label for="term">Срок (в месяцах):</label>
+      <select id="term" name="term" required>
+        <option value="">Выберите срок</option>
+        <option value="1">1 месяц</option>
+        <option value="3">3 месяца</option>
+        <option value="6">6 месяцев</option>
+        <option value="12">12 месяцев</option>
+      </select>
+
+      <label for="purpose">Цель кредита:</label>
+      <select id="purpose" name="purpose" required>
+        <option value="">Выберите цель</option>
+        <option value="education">Образование</option>
+        <option value="health">Здоровье</option>
+        <option value="home">Жильё</option>
+        <option value="business">Бизнес</option>
+        <option value="other">Другое</option>
+      </select>
+
+      <button type="submit">Отправить заявку</button>
+    </form>
+
+    <div id="loanMessage" class="loan-message"></div>
+  </div>
+
+  <script src="js/loan.js"></script>
+</body>
+</html>

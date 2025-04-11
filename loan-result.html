@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Результат заявки</title>
+  <link rel="stylesheet" href="css/loan-result.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Результат вашей заявки</h1>
+
+    <div id="result-box" class="result-box">
+      <!-- Сюда подставляется результат через JS -->
+    </div>
+
+    <div class="actions">
+      <a href="dashboard.html" class="btn">В личный кабинет</a>
+      <a href="loan-request.html" class="btn secondary">Подать новую заявку</a>
+    </div>
+  </div>
+
+  <script>
+    // Получаем данные из localStorage (или sessionStorage)
+    const resultBox = document.getElementById('result-box');
+    const loanResult = JSON.parse(localStorage.getItem('loanResult'));
+
+    if (loanResult) {
+      const { approved, amount, term, rate, message } = loanResult;
+
+      if (approved) {
+        resultBox.innerHTML = `
+          <h2 style="color: green;">Заявка одобрена ✅</h2>
+          <p>Сумма: <strong>${amount} сом</strong></p>
+          <p>Срок: <strong>${term} месяцев</strong></p>
+          <p>Процентная ставка: <strong>${rate}% годовых</strong></p>
+          <p>${message}</p>
+        `;
+      } else {
+        resultBox.innerHTML = `
+          <h2 style="color: red;">Заявка отклонена ❌</h2>
+          <p>${message}</p>
+          <p>Попробуйте указать поручителя, залог или другую цель кредита.</p>
+        `;
+      }
+    } else {
+      resultBox.innerHTML = `
+        <h2>Нет данных о заявке</h2>
+        <p>Пожалуйста, вернитесь и подайте заявку заново.</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>

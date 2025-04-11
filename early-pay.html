@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Досрочное погашение</title>
+  <link rel="stylesheet" href="css/early-pay.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Досрочное погашение кредита</h1>
+
+    <div id="loanInfo" class="loan-info">
+      <!-- Здесь будет отображаться информация о кредите -->
+    </div>
+
+    <form id="earlyPayForm" class="early-pay-form">
+      <label for="amount">Сумма досрочного погашения:</label>
+      <input type="number" id="amount" name="amount" placeholder="Введите сумму" required min="1000"/>
+
+      <button type="submit">Рассчитать и подтвердить</button>
+    </form>
+
+    <div id="confirmationMessage" class="confirmation-message"></div>
+
+    <div class="actions">
+      <a href="dashboard.html" class="btn secondary">Назад в кабинет</a>
+    </div>
+  </div>
+
+  <script>
+    // Имитация текущего кредита
+    const loan = JSON.parse(localStorage.getItem('activeLoan')) || {
+      amount: 50000,
+      remaining: 35000,
+      rate: 22,
+      term: 6
+    };
+
+    const loanInfo = document.getElementById('loanInfo');
+    const form = document.getElementById('earlyPayForm');
+    const messageBox = document.getElementById('confirmationMessage');
+
+    // Показ информации
+    loanInfo.innerHTML = `
+      <p>Остаток по кредиту: <strong>${loan.remaining} сом</strong></p>
+      <p>Ставка: <strong>${loan.rate}% годовых</strong></p>
+      <p>Оставшийся срок: <strong>${loan.term} месяцев</strong></p>
+    `;
+
+    // Обработка формы
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const payAmount = parseFloat(document.getElementById('amount').value);
+
+      if (payAmount <= 0 || payAmount > loan.remaining) {
+        messageBox.innerHTML = `<p style="color:red;">Некорректная сумма для досрочного погашения.</p>`;
+        return;
+      }
+
+      loan.remaining -= payAmount;
+      localStorage.setItem('activeLoan', JSON.stringify(loan));
+
+      messageBox.innerHTML = `
+        <p style="color:green;">Сумма <strong>${payAmount} сом</strong> успешно погашена.</p>
+        <p>Новый остаток: <strong>${loan.remaining} сом</strong></p>
+      `;
+    });
+  </script>
+
+</body>
+</html>
