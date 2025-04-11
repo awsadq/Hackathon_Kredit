@@ -4,26 +4,290 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Идентификация – KreditFast</title>
-  <link rel="stylesheet" href="css/verify.css" />
+  <style>
+    :root {
+      --primary-dark: #0f172a;
+      --primary-blue: #1e3a8a;
+      --accent-blue: #1e40af;
+      --light-blue: #3b82f6;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --success: #10b981;
+      --shadow: rgba(0, 0, 0, 0.25);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      color: var(--text-primary);
+    }
+    
+    .form-container {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px var(--shadow);
+      padding: 2rem;
+      width: 100%;
+      max-width: 550px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      border-bottom: 2px solid var(--light-blue);
+      padding-bottom: 0.75rem;
+    }
+    
+    .section {
+      background: rgba(30, 58, 138, 0.35);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+    
+    h3 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+    
+    h3::before {
+      content: "";
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: var(--accent-blue);
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    
+    #camera {
+      width: 100%;
+      height: 250px;
+      border-radius: 8px;
+      background-color: #000;
+      margin-bottom: 1rem;
+      object-fit: cover;
+      border: 2px solid var(--accent-blue);
+    }
+    
+    #selfiePreview, #passportPreview {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+      border-radius: 8px;
+      margin-top: 1rem;
+      object-fit: contain;
+      border: 2px solid var(--accent-blue);
+      display: none;
+    }
+    
+    button {
+      background: linear-gradient(to right, var(--accent-blue), var(--light-blue));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-weight: 600;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    button:hover {
+      background: linear-gradient(to right, var(--light-blue), var(--accent-blue));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    button:disabled {
+      background: #64748b;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    input[type="file"] {
+      display: none;
+    }
+    
+    .file-upload-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(30, 64, 175, 0.5);
+      border: 2px dashed var(--light-blue);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .file-upload-label:hover {
+      background: rgba(30, 64, 175, 0.7);
+    }
+    
+    .file-upload-label span {
+      margin-left: 8px;
+    }
+    
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(203, 213, 225, 0.2);
+      border-radius: 4px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 4px;
+    }
+
+    .status-message {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    #confirmBtn {
+      background: linear-gradient(to right, #059669, var(--success));
+      margin-top: 1rem;
+    }
+    
+    #confirmBtn:disabled {
+      background: #64748b;
+    }
+    
+    .check-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+    
+    .capture-container {
+      position: relative;
+    }
+    
+    .camera-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+    }
+    
+    .camera-outline {
+      width: 80%;
+      height: 80%;
+      border: 2px dashed var(--light-blue);
+      border-radius: 8px;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    .section:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    #confirmBtn {
+      animation: fadeIn 0.5s ease-out 0.4s forwards;
+      opacity: 0;
+    }
+  </style>
 </head>
 <body>
   <div class="form-container">
     <h2>Цифровая идентификация личности</h2>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <p class="status-message" id="statusMessage">Заполните все этапы для подтверждения</p>
 
     <!-- 📸 Селфи -->
     <div class="section">
-      <h3>1. Сделайте селфи</h3>
-      <video id="camera" autoplay playsinline></video>
+      <h3>Сделайте селфи</h3>
+      <div class="capture-container">
+        <video id="camera" autoplay playsinline></video>
+        <div class="camera-overlay">
+          <div class="camera-outline pulse"></div>
+        </div>
+      </div>
       <button id="takePhotoBtn">📸 Сделать фото</button>
       <canvas id="snapshot" style="display:none;"></canvas>
-      <img id="selfiePreview" style="max-width: 100%; margin-top: 10px;" alt="Селфи превью">
+      <img id="selfiePreview" alt="Селфи превью">
     </div>
 
     <!-- 🪪 Паспорт -->
     <div class="section">
-      <h3>2. Загрузите фото паспорта</h3>
+      <h3>Загрузите фото паспорта</h3>
+      <label for="passportInput" class="file-upload-label">
+        🪪 <span>Нажмите, чтобы выбрать файл</span>
+      </label>
       <input type="file" id="passportInput" accept="image/*" required />
-      <img id="passportPreview" style="max-width: 100%; margin-top: 10px;" alt="Паспорт превью">
+      <img id="passportPreview" alt="Паспорт превью">
     </div>
 
     <button id="confirmBtn" disabled>✅ Подтвердить личность</button>
@@ -37,36 +301,87 @@
     const passportInput = document.getElementById('passportInput');
     const passportPreview = document.getElementById('passportPreview');
     const confirmBtn = document.getElementById('confirmBtn');
+    const progressBar = document.getElementById('progressBar');
+    const statusMessage = document.getElementById('statusMessage');
 
     let selfieTaken = false;
     let passportUploaded = false;
 
+    // Update progress
+    function updateProgress() {
+      let progress = 0;
+      if (selfieTaken) progress += 50;
+      if (passportUploaded) progress += 50;
+      
+      progressBar.style.width = progress + '%';
+      
+      if (progress === 100) {
+        statusMessage.textContent = 'Все готово! Нажмите "Подтвердить личность"';
+        statusMessage.style.color = '#10b981';
+      } else if (progress > 0) {
+        statusMessage.textContent = 'Заполнено: ' + progress + '%';
+      }
+    }
+
     // 📷 Доступ к камере
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
       .then(stream => {
         video.srcObject = stream;
       }).catch(err => {
         alert("Ошибка доступа к камере: " + err.message);
       });
 
-    // 📸 Снятие селфи
+    // 📸 Снятие селфи с эффектами
     takePhotoBtn.addEventListener('click', () => {
+      // Visual flash effect
+      const flash = document.createElement('div');
+      flash.style.position = 'fixed';
+      flash.style.top = '0';
+      flash.style.left = '0';
+      flash.style.width = '100%';
+      flash.style.height = '100%';
+      flash.style.backgroundColor = 'white';
+      flash.style.opacity = '0.6';
+      flash.style.zIndex = '9999';
+      flash.style.pointerEvents = 'none';
+      document.body.appendChild(flash);
+      
+      // Take photo
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       canvas.getContext('2d').drawImage(video, 0, 0);
       selfiePreview.src = canvas.toDataURL('image/png');
-      selfieTaken = true;
-      checkReady();
+      selfiePreview.style.display = 'block';
+      
+      // Remove flash effect
+      setTimeout(() => {
+        document.body.removeChild(flash);
+        // Success animation for photo
+        takePhotoBtn.textContent = '✅ Фото сделано';
+        takePhotoBtn.style.background = 'linear-gradient(to right, #059669, #10b981)';
+        selfieTaken = true;
+        updateProgress();
+        checkReady();
+      }, 150);
     });
 
-    // 🪪 Загрузка паспорта
+    // 🪪 Загрузка паспорта с анимацией
     passportInput.addEventListener('change', () => {
       const file = passportInput.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = e => {
           passportPreview.src = e.target.result;
+          passportPreview.style.display = 'block';
+          
+          // Show file name and animate
+          const fileLabel = document.querySelector('.file-upload-label');
+          fileLabel.innerHTML = '✅ <span>' + file.name + '</span>';
+          fileLabel.style.background = 'rgba(16, 185, 129, 0.2)';
+          fileLabel.style.borderColor = '#10b981';
+          
           passportUploaded = true;
+          updateProgress();
           checkReady();
         };
         reader.readAsDataURL(file);
@@ -77,13 +392,30 @@
     function checkReady() {
       if (selfieTaken && passportUploaded) {
         confirmBtn.disabled = false;
+        confirmBtn.classList.add('pulse');
       }
     }
 
-    // 🔄 Подтверждение
+    // 🔄 Подтверждение с красивой анимацией
     confirmBtn.addEventListener('click', () => {
-      alert('Личность подтверждена! ✅');
-      window.location.href = 'dashboard.html';
+      confirmBtn.textContent = 'Проверка данных...';
+      
+      // Simulate verification process
+      let progress = 0;
+      const verifyInterval = setInterval(() => {
+        progress += 5;
+        progressBar.style.width = progress + '%';
+        
+        if (progress >= 100) {
+          clearInterval(verifyInterval);
+          confirmBtn.textContent = '✅ Личность подтверждена!';
+          
+          // Redirect after small delay
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 1500);
+        }
+      }, 100);
     });
   </script>
 </body>

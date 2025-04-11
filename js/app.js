@@ -34,3 +34,30 @@ function verifyCode() {
     alert("Неверный код. Попробуйте снова.");
   }
 }
+
+
+// === СЛАЙДЕР-ФРАЗ ===
+const slideText = document.getElementById('slideText');
+const phrases = [
+  "Добро пожаловать в KreditFast",
+  "Онлайн-кредиты за 2 минуты",
+  "Ваш финансовый путь начинается здесь",
+  "Надёжность, прозрачность, технология"
+];
+let currentSlide = 0;
+
+function updateSlide() {
+  slideText.textContent = phrases[currentSlide];
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % phrases.length;
+  updateSlide();
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + phrases.length) % phrases.length;
+  updateSlide();
+}
+
+setInterval(nextSlide, 3000);

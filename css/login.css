@@ -1,119 +1,451 @@
-/* === Базовая настройка формы === */
-body {
-    background: linear-gradient(135deg, #0077ff, #00c8ff);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+:root {
+    --primary: #2196F3; /* Blue */
+    --primary-dark: #1565C0;
+    --primary-light: #64B5F6;
+    --primary-glow: rgba(33, 150, 243, 0.15);
+    --dark: #1A1A1A;
+    --dark-gray: #333333;
+    --light-gray: #F5F5F5;
+    --white: #FFFFFF;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s ease;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Enhanced Background */
+  body {
+    /* Option 1: Gradient background with animated particles */
+    background: linear-gradient(135deg, #0D1B2A 0%, #1B263B 50%, #0D1B2A 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    color: var(--dark-gray);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Background animation */
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Decorative elements - floating particles */
+  body::before,
+  body::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--primary-glow) 0%, rgba(33, 150, 243, 0) 70%);
+    z-index: 0;
+  }
+  
+  body::before {
+    top: -100px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  body::after {
+    bottom: -150px;
+    left: -100px;
+    animation: float 12s ease-in-out infinite reverse;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+    100% { transform: translateY(0) scale(1); }
+  }
+  
+  /* Optional background image with overlay - 
+     Uncomment and replace the URL to use this instead of the gradient */
+  /*
+  body {
+    background-image: url('your-image-url.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
     min-height: 100vh;
-    color: #333;
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--dark-gray);
   }
   
-  .form-container {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 20px;
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 420px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.6s ease;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(13, 27, 42, 0.85) 0%, rgba(27, 38, 59, 0.9) 100%);
+    z-index: 0;
+  }
+  */
+  
+  /* Enhanced Form Container */
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: var(--shadow), 0 0 20px rgba(33, 150, 243, 0.2);
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease;
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-light));
   }
   
-  .form-container h2 {
+  /* Logo container */
+  .logo-container {
     text-align: center;
-    color: #0077ff;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
   
-  /* === Формы === */
+  .logo-container img {
+    height: 40px;
+    margin-bottom: 15px;
+  }
+  
+  /* Enhanced Headings */
+  h2 {
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
+  
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-light));
+    border-radius: 3px;
+  }
+  
+  /* Enhanced Form Elements */
   form {
     display: flex;
     flex-direction: column;
+    gap: 22px;
   }
   
-  form label {
+  label {
+    color: var(--dark-gray);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+    transition: var(--transition);
+  }
+  
+  .input-group {
+    position: relative;
+  }
+  
+  input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid rgba(225, 225, 225, 0.8);
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    font-size: 16px;
+    transition: var(--transition);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+    background-color: var(--white);
+  }
+  
+  input::placeholder {
+    color: #b0b0b0;
+  }
+  
+  /* Enhanced Buttons */
+  button {
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    padding: 18px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 6px;
-    color: #444;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(21, 101, 192, 0.3);
   }
   
-  form input {
-    padding: 12px 14px;
-    margin-bottom: 20px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+  button:hover {
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.35);
+    transform: translateY(-3px);
+  }
+  
+  button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(33, 150, 243, 0.25);
+  }
+  
+  /* Button ripple effect */
+  button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+    }
+    20% {
+      transform: scale(25, 25);
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(40, 40);
+    }
+  }
+  
+  /* Enhanced SMS Code Section */
+  #smsCodeSection {
+    background-color: rgba(248, 248, 248, 0.8);
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 4px solid var(--primary);
+    animation: slideDown 0.5s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 25px;
+    backdrop-filter: blur(5px);
+  }
+  
+  #smsCode {
+    font-size: 20px;
+    letter-spacing: 4px;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  /* Enhanced Links */
+  p {
+    margin-top: 30px;
+    text-align: center;
     font-size: 15px;
   }
   
-  form input:focus {
-    border-color: #0077ff;
-    outline: none;
-    box-shadow: 0 0 6px rgba(0, 119, 255, 0.3);
-  }
-  
-  /* === Кнопки === */
-  form button,
-  #smsCodeSection button {
-    padding: 12px;
-    border: none;
-    background: #0077ff;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  form button:hover,
-  #smsCodeSection button:hover {
-    background: #005fcc;
-  }
-  
-  p {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  
-  p a {
-    color: #0077ff;
+  a {
+    color: var(--primary);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
   }
   
-  p a:hover {
-    text-decoration: underline;
+  a:hover {
+    color: var(--primary-dark);
   }
   
-  /* === Секция кода SMS === */
-  #smsCodeSection {
-    border-top: 1px dashed #ccc;
-    padding-top: 20px;
-    margin-top: 20px;
-  }
-  
-  #smsCodeSection input {
+  a::after {
+    content: '';
+    position: absolute;
     width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-dark);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
   }
   
-  /* === Адаптивность === */
+  a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  /* Enhanced Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Enhanced Responsive Styles */
   @media (max-width: 480px) {
     .form-container {
       padding: 30px 20px;
+      border-radius: 12px;
     }
+    
+    h2 {
+      font-size: 24px;
+    }
+    
+    input, button {
+      padding: 14px;
+    }
+  }
+  
+  /* Enhanced Form Field Focus Effect */
+  .input-group {
+    position: relative;
+  }
+  
+  .form-container label {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .input-group:focus-within label {
+    color: var(--primary);
+  }
+  
+  /* Enhanced Error Styles */
+  .error {
+    border-color: #ff3860 !important;
+    box-shadow: 0 0 0 2px rgba(255, 56, 96, 0.1) !important;
+  }
+  
+  .error-message {
+    color: #ff3860;
+    font-size: 12px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .error-message::before {
+    content: "⚠";
+    margin-right: 5px;
+  }
+  
+  /* Enhanced Success Indicator */
+  .success {
+    border-color: #23d160 !important;
+    box-shadow: 0 0 0 2px rgba(35, 209, 96, 0.1) !important;
+  }
+  
+  .success::after {
+    content: "✓";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #23d160;
+    font-size: 16px;
+  }
+  
+  /* Enhanced Branding Elements */
+  .form-container::after {
+    content: "KreditFast";
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 12px;
+    color: #e1e1e1;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  
+  /* Add subtle form separator */
+  .form-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .form-separator::before,
+  .form-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  
+  .form-separator span {
+    padding: 0 10px;
+    color: #b0b0b0;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  
+  /* Add shimmering effect to the form container border */
+  @keyframes shimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 100% 0; }
+  }
+  
+  .form-container {
+    position: relative;
+  }
+  
+  .form-container::before {
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-light), var(--primary), var(--primary-dark));
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
   }
   

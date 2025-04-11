@@ -1,4 +1,10 @@
-/* === Базовая настройка === */
+/* === Палитра ===
+Основной: #6c63ff (сиреневый)
+Дополнительный: #2e2e3a (графитовый)
+Фон: #f5f3fa / #e9e6f5
+Акценты: #9f91ff, #d6d0ff
+*/
+
 * {
     margin: 0;
     padding: 0;
@@ -7,14 +13,14 @@
   }
   
   body {
-    background: #f4f7fc;
-    color: #222;
+    background: #f5f3fa;
+    color: #2e2e3a;
     line-height: 1.6;
   }
   
   /* === Header === */
   .header {
-    background: linear-gradient(135deg, #0077ff, #00c8ff);
+    background: linear-gradient(135deg, #6c63ff, #9f91ff);
     color: white;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -46,7 +52,7 @@
   
   .lang-switch button {
     background: white;
-    color: #0077ff;
+    color: #6c63ff;
     border: none;
     padding: 8px 14px;
     margin-left: 8px;
@@ -57,7 +63,7 @@
   }
   
   .lang-switch button:hover {
-    background: #e0f0ff;
+    background: #ebe6ff;
   }
   
   /* === Навигация === */
@@ -69,8 +75,8 @@
   }
   
   .nav .btn {
-    background: #fff;
-    color: #0077ff;
+    background: white;
+    color: #6c63ff;
     padding: 10px 20px;
     border-radius: 25px;
     text-decoration: none;
@@ -80,7 +86,7 @@
   }
   
   .nav .btn:hover {
-    background: #e6f4ff;
+    background: #ebe6ff;
   }
   
   /* === Герой === */
@@ -92,12 +98,14 @@
   .hero h2 {
     font-size: 2em;
     margin-bottom: 10px;
+    color: #2e2e3a;
   }
   
   .hero p {
     font-size: 1.2em;
     max-width: 600px;
     margin: auto;
+    color: #3d3d4f;
   }
   
   /* === Образовательный блок === */
@@ -109,6 +117,7 @@
     text-align: center;
     font-size: 1.8em;
     margin-bottom: 30px;
+    color: #6c63ff;
   }
   
   .cards-container {
@@ -123,13 +132,13 @@
     width: 300px;
     border-radius: 16px;
     padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(108, 99, 255, 0.2);
   }
   
   .card img {
@@ -139,12 +148,12 @@
   }
   
   .card h3 {
-    color: #0077ff;
+    color: #6c63ff;
     margin-bottom: 10px;
   }
   
   .card p {
-    color: #333;
+    color: #444;
   }
   
   /* === AI Чат === */
@@ -156,7 +165,7 @@
   }
   
   #openChat {
-    background: #0077ff;
+    background: #6c63ff;
     color: white;
     border: none;
     border-radius: 50%;
@@ -183,7 +192,7 @@
   }
   
   #chatHeader {
-    background: #0077ff;
+    background: #6c63ff;
     color: white;
     padding: 12px;
     font-weight: bold;
@@ -210,12 +219,94 @@
   .footer {
     text-align: center;
     padding: 20px;
-    background: #eaf4ff;
+    background: #eae6f7;
     color: #555;
     font-size: 0.9em;
     margin-top: 50px;
-    border-top: 1px solid #cde4ff;
+    border-top: 1px solid #d6d0ff;
   }
+
+  .hero-slider {
+    position: relative;
+    height: 100vh;
+    background: url('assets/background1.jpg') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+  }
+  
+  .hero-slider .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 18, 33, 0.8); /* графит с затемнением */
+    z-index: 1;
+  }
+  
+  .slider-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+  }
+  
+  .slider-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    color: #d6d0ff;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .slider-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .hero-btn {
+    background: #6c63ff;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+  }
+  
+  .hero-btn:hover {
+    background: #5b54d8;
+  }
+  
+  .slider-controls {
+    position: absolute;
+    bottom: 30px;
+    z-index: 2;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .slider-controls button {
+    background: #9f91ff;
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
   
   /* === Адаптивность === */
   @media (max-width: 768px) {
@@ -238,4 +329,5 @@
       gap: 10px;
     }
   }
+  
   
